@@ -1,334 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080b14">
-<title>Road to Pro | Youth Soccer Directory</title>
-<style>
-:root {
-  --bg:#080b14;
-  --panel:#101625;
-  --panel2:#151d30;
-  --text:#f3f6ff;
-  --muted:#929db5;
-  --blue:#52a7ff;
-  --purple:#a879ff;
-  --border:#26314a;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;
-}
-a{color:var(--blue)}
-nav{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:15px;padding:20px max(5%,calc((100% - 1200px)/2));
-  border-bottom:1px solid var(--border);background:#0a0e19;
-}
-.brand{font-weight:900;letter-spacing:1px;font-size:19px}
-.brand span{color:var(--blue)}
-.navtag{color:var(--muted);font-size:13px}
-main{max-width:1200px;margin:auto;padding:35px 22px 70px}
-.hero{
-  padding:36px 30px;border:1px solid #29395b;border-radius:22px;
-  background:radial-gradient(ellipse at 90% 0%,#273c713d,transparent 48%),
-  linear-gradient(135deg,#131c31,#0c1120);
-  box-shadow:0 0 45px #247bff0b;
-}
-.eyebrow{color:var(--blue);font-weight:800;font-size:12px;letter-spacing:2px}
-h1{font-size:clamp(34px,6vw,58px);margin:12px 0;letter-spacing:-2px}
-h1 span{color:var(--blue)}
-p{line-height:1.6}
-.muted{color:var(--muted)}
-.filters{
-  display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;
-  margin:25px 0 32px;
-}
-input,select{
-  width:100%;padding:14px 15px;border-radius:11px;
-  background:#101727;color:var(--text);border:1px solid var(--border);
-  font:inherit;outline:none;min-width:0;
-}
-input:focus,select:focus{border-color:var(--blue)}
-.sectionhead{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:12px;margin:32px 0 16px;
-}
-h2{font-size:22px;margin:0}
-.count{font-size:12px;color:var(--muted)}
-.layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(260px,1fr);gap:22px}
-.teams{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.card,.leaderboard,.info{
-  background:var(--panel);border:1px solid var(--border);border-radius:16px;
-}
-.card{padding:18px;transition:.2s}
-.card:hover{border-color:#477dcc;transform:translateY(-2px)}
-.teamtop{display:flex;align-items:center;gap:13px}
-.logo{
-  width:54px;height:54px;flex-shrink:0;border-radius:15px;
-  display:grid;place-items:center;font-weight:900;font-size:17px;
-  color:white;background:linear-gradient(135deg,#246dce,#7546bd);
-  box-shadow:0 0 20px #4e8cff20;
-}
-.teamname{font-size:15px;font-weight:800}
-.tag{
-  display:inline-block;margin-top:7px;padding:4px 8px;border-radius:6px;
-  background:#202d45;color:#a8cfff;font-size:10px;font-weight:800;
-}
-.card p{font-size:12px;color:var(--muted);margin:15px 0}
-.actions{display:flex;flex-wrap:wrap;gap:8px}
-.btn{
-  cursor:pointer;padding:9px 12px;border:1px solid #344463;border-radius:8px;
-  background:#17223a;color:var(--text);font-size:12px;font-weight:700;
-}
-.btn:hover{border-color:var(--blue)}
-.btn.primary{background:#246bd0;border-color:#246bd0}
-.leaderboard{padding:19px}
-.leaderrow{
-  display:grid;grid-template-columns:25px 1fr auto;gap:10px;
-  align-items:center;padding:14px 0;border-bottom:1px solid var(--border);
-}
-.leaderrow:last-child{border-bottom:0}
-.rank{color:var(--blue);font-weight:900}
-.clubshort{font-size:12px;font-weight:750}
-.clubsub{font-size:10px;color:var(--muted);margin-top:4px}
-.points{font-size:11px;color:var(--muted)}
-.notice{
-  border:1px solid #4a3d70;background:#17142a;border-radius:12px;
-  padding:14px;color:#c8b8ff;font-size:12px;line-height:1.6;margin-top:15px;
-}
-.info{padding:20px;margin-top:22px}
-.info h2{font-size:17px}
-.info p{font-size:13px;color:var(--muted)}
-.empty{
-  grid-column:1/-1;text-align:center;padding:40px 15px;
-  border:1px dashed var(--border);border-radius:14px;color:var(--muted);
-}
-footer{
-  padding:25px;text-align:center;border-top:1px solid var(--border);
-  font-size:12px;color:var(--muted);
-}
-dialog{
-  max-width:480px;width:calc(100% - 30px);padding:25px;
-  color:var(--text);background:var(--panel2);border:1px solid #39496b;
-  border-radius:17px;
-}
-dialog::backdrop{background:#000b}
-@media(max-width:800px){
-  .layout{grid-template-columns:1fr}
-  .filters{grid-template-columns:1fr 1fr}
-  .filters input{grid-column:1/-1}
-}
-@media(max-width:500px){
-  main{padding:22px 14px 45px}
-  .hero{padding:25px 19px}
-  .teams{grid-template-columns:1fr}
-  nav{padding:17px}
-  .navtag{font-size:11px}
-}
-</style>
-</head>
-<body>
-<nav>
-  <div class="brand">ROAD TO <span>PRO</span></div>
-  <div class="navtag">YOUTH SOCCER NETWORK</div>
-</nav>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b14">
+  <title>Road to Pro | Leagues</title>
+  <style>
+    :root {
+      --bg: #080b14;
+      --panel: #111827;
+      --border: #27344d;
+      --text: #f4f7ff;
+      --muted: #98a6bf;
+      --blue: #48a5ff;
+      --purple: #a16eff;
+    }
 
-<main>
-  <section class="hero">
-    <div class="eyebrow">YOUR JOURNEY STARTS HERE</div>
-    <h1>Find your next <span>level.</span></h1>
-    <p class="muted">Explore real youth soccer clubs by league and state.
-      Discover development pathways and follow your favorite teams.</p>
-  </section>
+    * { box-sizing: border-box; }
 
-  <div class="sectionhead">
-    <h2>Explore clubs</h2>
-    <span class="count" id="resultCount">Loading clubs...</span>
-  </div>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 15% 0%, #17325a44, transparent 40%),
+        radial-gradient(ellipse at 90% 25%, #54247720, transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-  <section class="filters">
-    <input id="search" type="search" placeholder="Search clubs..." aria-label="Search clubs">
-    <select id="league" aria-label="Choose league">
-      <option value="">All leagues</option>
-      <option value="MLS NEXT">MLS NEXT</option>
-      <option value="ECNL Boys">ECNL Boys</option>
-      <option value="ECNL Girls">ECNL Girls</option>
-      <option value="Girls Academy">Girls Academy</option>
-      <option value="USYS National League">USYS National League</option>
-    </select>
-    <select id="state" aria-label="Choose state">
-      <option value="">All states</option>
-      <option value="Texas">Texas</option>
-      <option value="California">California</option>
-      <option value="Florida">Florida</option>
-      <option value="New York">New York</option>
-      <option value="North Carolina">North Carolina</option>
-      <option value="Ohio">Ohio</option>
-      <option value="Pennsylvania">Pennsylvania</option>
-    </select>
-  </section>
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 7%;
+      background: #0a0f1bcc;
+      border-bottom: 1px solid var(--border);
+    }
 
-  <div class="layout">
-    <section>
-      <div class="teams" id="teams"></div>
-    </section>
+    .brand {
+      font-size: 21px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
 
-    <aside>
-      <section class="leaderboard">
-        <div class="sectionhead" style="margin:0 0 8px">
-          <h2>Rankings</h2>
-          <span class="count">STANDINGS</span>
-        </div>
-        <p class="muted" style="font-size:12px">
-          Official standings will appear here when verified league results
-          are connected.
-        </p>
-        <div id="rankings"></div>
-        <div class="notice">
-          Rankings are not fabricated. This starter version does not yet
-          have a live league standings feed.
-        </div>
-      </section>
+    .brand span { color: var(--blue); }
 
-      <section class="info">
-        <h2>About the directory</h2>
-        <p>Use the filters to find clubs in a specific league and state.
-          Club membership, age groups, rosters, and standings should be
-          verified against official league sources.</p>
-        <a href="https://www.mlssoccer.com/mlsnext/about/members"
-           target="_blank" rel="noopener noreferrer">
-          Official MLS NEXT club directory ↗
-        </a>
-      </section>
-    </aside>
-  </div>
-</main>
+    .status {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
 
-<footer>
-  ROAD TO PRO · Youth soccer discovery
-  <br><br>
-  Independent directory concept. Not affiliated with MLS or any listed club.
-</footer>
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 55px 22px;
+    }
 
-<dialog id="teamDialog">
-  <div class="eyebrow">CLUB PROFILE</div>
-  <h2 id="dialogName" style="margin-top:12px"></h2>
-  <p id="dialogDetails" class="muted"></p>
-  <p id="dialogRoster" style="font-size:13px;line-height:1.7"></p>
-  <div class="actions">
-    <a id="officialLink" class="btn primary" target="_blank"
-       rel="noopener noreferrer" href="https://www.mlssoccer.com/mlsnext/about/members">
-      Check official directory ↗
-    </a>
-    <button class="btn" onclick="teamDialog.close()">Close</button>
-  </div>
-</dialog>
+    .eyebrow {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
 
-<script>
-// Starter data based on official MLS NEXT club listings.
-// Verify each club's current division and membership before expanding.
-// Logos, rosters, and standings are not invented.
-const clubs = [
-  {name:"A.C. River",state:"Texas",league:"MLS NEXT",initials:"AC"},
-  {name:"Austin FC",state:"Texas",league:"MLS NEXT",initials:"AT"},
-  {name:"Capital City SC",state:"Texas",league:"MLS NEXT",initials:"CC"},
-  {name:"Dallas Hornets",state:"Texas",league:"MLS NEXT",initials:"DH"},
-  {name:"FC Dallas",state:"Texas",league:"MLS NEXT",initials:"FD"},
-  {name:"Global Football Innovation Academy",state:"Texas",league:"MLS NEXT",initials:"GF"},
-  {name:"Houston Dynamo",state:"Texas",league:"MLS NEXT",initials:"HD"},
-  {name:"Houston Rangers",state:"Texas",league:"MLS NEXT",initials:"HR"},
-  {name:"IDEA Toros Futbol Academy",state:"Texas",league:"MLS NEXT",initials:"IT"}
-];
+    h1 {
+      font-size: clamp(38px, 7vw, 62px);
+      letter-spacing: -2px;
+      margin: 12px 0;
+    }
 
-const searchInput = document.getElementById("search");
-const leagueInput = document.getElementById("league");
-const stateInput = document.getElementById("state");
-const teamsEl = document.getElementById("teams");
-const countEl = document.getElementById("resultCount");
-const rankingsEl = document.getElementById("rankings");
-const teamDialog = document.getElementById("teamDialog");
+    h1 span {
+      color: var(--blue);
+      text-shadow: 0 0 28px #48a5ff50;
+    }
 
-function filteredClubs(){
-  const q = searchInput.value.trim().toLowerCase();
-  const league = leagueInput.value;
-  const state = stateInput.value;
-  return clubs.filter(c =>
-    c.name.toLowerCase().includes(q) &&
-    (!league || c.league === league) &&
-    (!state || c.state === state)
-  );
-}
+    .subtitle {
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 560px;
+    }
 
-function render(){
-  const list = filteredClubs();
-  countEl.textContent = `${list.length} club${list.length===1?"":"s"} found`;
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 36px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
 
-  if(!list.length){
-    teamsEl.innerHTML = `<div class="empty">
-      <strong>No clubs found</strong>
-      <p>Try another search or filter. More verified league and state
-      data can be added to this directory.</p>
-    </div>`;
-  } else {
-    teamsEl.innerHTML = list.map((c,i) => `
-      <article class="card">
-        <div class="teamtop">
-          <div class="logo">${escapeHTML(c.initials)}</div>
-          <div>
-            <div class="teamname">${escapeHTML(c.name)}</div>
-            <span class="tag">${escapeHTML(c.league)}</span>
-          </div>
-        </div>
-        <p>${escapeHTML(c.state)} · Youth club</p>
-        <div class="actions">
-          <button class="btn primary" data-profile="${i}">Club profile</button>
-          <button class="btn" data-roster="${i}">Roster info</button>
-        </div>
-      </article>
-    `).join("");
-
-    teamsEl.querySelectorAll("[data-profile]").forEach((btn) =>
-      btn.addEventListener("click", () => openProfile(list[Number(btn.dataset.profile)],false))
-    );
-    teamsEl.querySelectorAll("[data-roster]").forEach((btn) =>
-      btn.addEventListener("click", () => openProfile(list[Number(btn.dataset.roster)],true))
-    );
-  }
-
-  // A verified leaderboard cannot be shown until standings are supplied.
-  rankingsEl.innerHTML = `<div class="leaderrow">
-    <div class="rank">—</div>
-    <div>
-      <div class="clubshort">Standings unavailable</div>
-      <div class="clubsub">Awaiting verified league data</div>
-    </div>
-    <div class="points">—</div>
-  </div>`;
-}
-
-function openProfile(club,showRoster){
-  document.getElementById("dialogName").textContent = club.name;
-  document.getElementById("dialogDetails").textContent =
-    `${club.state} · ${club.league}`;
-  document.getElementById("dialogRoster").textContent = showRoster
-    ? "Player names and age-group rosters have not been added. Check the club's official website for current team and roster information. Personal information about minors should only be published with appropriate authorization."
-    : "This club appears in the starter directory. Confirm current age groups, team divisions, tryout dates, and contact details with the club before making decisions.";
-  teamDialog.showModal();
-}
-
-function escapeHTML(value){
-  return String(value).replace(/[&<>"']/g, char => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  }[char]));
-}
-
-searchInput.addEventListener("input",render);
-leagueInput.addEventListener("change",render);
-stateInput.addEventListener("change",render);
-render();
-</script>
-</body>
-</html>
+    .tab {
+      padding: 13px 25px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #111
